@@ -2,5 +2,5 @@
 sudo -i
 apt update
 apt install apache2  -y
-git clone https://github.com/methleshsingh99/swigg_clone.git  ###########    to download the file from github
-mv swigg_clone/* /var/www/html/            ########### for move the file to another dictory
+git clone https://github.com/methleshsingh99/swigg_clone.git
+mv swigg_clone/* /var/www/html/
