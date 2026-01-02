@@ -1,3 +1,8 @@
+#! /bin/bash
+sudo -i
+apt update
+
+
 #PROMETHEUS
 
 wget https://github.com/prometheus/prometheus/releases/download/v2.43.0/prometheus-2.43.0.linux-amd64.tar.gz
@@ -55,4 +60,5 @@ EOF
 
 sudo ls -l /etc/systemd/system/prometheus.service
 sudo systemctl daemon-reload && sudo systemctl enable prometheus
+
 sudo systemctl start prometheus && sudo systemctl status prometheus --no-pager
