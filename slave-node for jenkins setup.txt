@@ -1,0 +1,9 @@
+#! /bin/bash
+sudo -i
+sudo apt update
+sudo apt install -y wget gnupg
+wget -qO - https://repos.azul.com/azul-repo.key   sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/azul.gpg
+echo "deb https://repos.azul.com/zulu/deb stable main"   sudo tee /etc/apt/sources.list.d/zulu.list
+sudo apt update
+sudo apt install -y zulu8-jdk
+sudo apt install -y maven
