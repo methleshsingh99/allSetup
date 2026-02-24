@@ -64,3 +64,43 @@ kops validate cluster
 
 kubectl get nodes
 
+
+kops install on amazonlinux
+
+
+sudo yum update -y
+sudo yum install unzip curl -y
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o awscliv2.zip
+unzip awscliv2.zip
+sudo ./aws/install
+aws configure
+
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+chmod +x kubectl
+sudo mv kubectl /usr/local/bin/
+kubectl version --client
+wget https://github.com/kubernetes/kops/releases/download/v1.33.0/kops-linux-amd64
+chmod +x kops-linux-amd64
+sudo mv kops-linux-amd64 /usr/local/bin/kops
+
+echo 'export PATH=$PATH:/usr/local/bin' >> ~/.bashrc
+source ~/.bashrc
+
+aws s3 mb s3://mkumar.k8s.local
+
+export KOPS_STATE_STORE=s3://mkumar.k8s.local
+echo $KOPS_STATE_STORE
+kops create cluster \
+--name mkumarserver.k8s.local \
+--zones ap-south-1a \
+--control-plane-count=1 \
+--control-plane-size c7i-flex.large \
+--node-count=2 \
+--node-size c7i-flex.large \
+--image ami-02b8269d5e85954ef
+
+kops update cluster 
+
+kops validate cluster
+
+
